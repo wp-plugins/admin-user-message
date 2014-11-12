@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Admin User Message
  * Description: Add message to users of wp-admin. Choose wheter they can dismiss it or not.
- * Version: 0.0.1
+ * Version: 0.0.2
  * Author: Jonathan Bardo
  * License: GPLv2+
  * Text Domain: admin-user-message
@@ -116,7 +116,7 @@ class Admin_User_Message {
 		$id = self::SETTINGS_PREFIX . 'dismiss';
 		add_settings_field(
 			$id,
-			__( 'Allow message to be dismiss', 'admin-user-message' ),
+			__( 'Allow message to be dismissed', 'admin-user-message' ),
 			array( static::$class, 'checkbox_render' ),
 			self::PAGE_NAME,
 			'default',
@@ -131,7 +131,7 @@ class Admin_User_Message {
 		$id = self::SETTINGS_PREFIX . 'reset';
 		add_settings_field(
 			$id,
-			__( 'Force message display on page reload', 'admin-user-message' ),
+			__( 'Reset dismiss for everyone. (Force appearance of message)', 'admin-user-message' ),
 			array( static::$class, 'checkbox_render' ),
 			self::PAGE_NAME,
 			'default',
@@ -311,7 +311,7 @@ class Admin_User_Message {
 			}
 		</style>
 		<div class="<?php echo esc_attr( get_option( self::SETTINGS_PREFIX . 'type', 'updated' ) ); ?> admin-user-message">
-			<p class="content"><?php echo $content; //xss ok ?></p>
+			<p class="content"><?php echo wpautop( $content ); //xss ok ?></p>
 			<?php if ( ! empty( $is_dismiss ) ):  ?>
 				<p class="dismiss">
 					<a href="<?php echo admin_url( 'admin-ajax.php?action=admin_user_message_dismiss&admin_user_message_nonce=' . wp_create_nonce( 'admin_user_message_nonce' ) ); //xss ok ?>"
