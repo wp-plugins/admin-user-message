@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Admin User Message
  * Description: Add message to users of wp-admin. Choose wheter they can dismiss it or not.
- * Version: 0.0.3
+ * Version: 0.0.4
  * Author: Jonathan Bardo
  * License: GPLv2+
  * Text Domain: admin-user-message
@@ -323,7 +323,7 @@ class Admin_User_Message {
 		</div>
 		<script>
 			(function($) {
-				$('.admin-user-message p.dismiss a').on('click', function(event) {
+				$('.admin-user-message div.dismiss a').on('click', function(event) {
 					event.preventDefault();
 					var $link = $(this);
 					$.get(
